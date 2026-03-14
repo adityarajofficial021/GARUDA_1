@@ -1199,3 +1199,33 @@ img {
     color: var(--success);
     margin-bottom: 1.5rem;
 }
+
+/* Enhanced Animations */
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+
+.btn-primary:active {
+    transform: scale(0.95);
+}
+
+.btn-primary:hover {
+    animation: pulseGlow 1.5s infinite;
+}
+
+.worker-card:hover .worker-photo {
+    transform: scale(1.1) rotate(5deg);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.worker-photo {
+    transition: transform 0.3s ease;
+}
+
+.input-with-icon input:focus, .custom-select:focus, textarea:focus {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md), 0 0 0 3px rgba(37, 99, 235, 0.2);
+    transition: all 0.3s ease;
+}
