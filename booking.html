@@ -20,6 +20,7 @@
                 <span style="font-weight: 600; color: var(--text-main);">Secure Checkout</span>
             </div>
             <div class="nav-actions">
+                <a href="#" onclick="history.back(); return false;" class="btn btn-outline" style="margin-right: 15px;"><i class="fas fa-arrow-left"></i> Back</a>
                 <div class="user-profile-mini">
                     <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff&size=40" alt="User">
                 </div>
@@ -45,12 +46,12 @@
                         <div class="form-group" style="margin-top: 1rem;">
                             <select id="booking-service" class="custom-select" required>
                                 <option value="" disabled selected>Select a Service</option>
-                                <option value="Mason">Mason (₹700/hr)</option>
-                                <option value="Construction Helper">Construction Helper (₹500/hr)</option>
-                                <option value="House Moving">House Moving (₹600/hr)</option>
-                                <option value="Painter">Painter (₹650/hr)</option>
-                                <option value="Electrician">Electrician (₹800/hr)</option>
-                                <option value="General Labour">General Labour (₹400/hr)</option>
+                                <option value="Mason">Mason (₹700/day)</option>
+                                <option value="Construction Helper">Construction Helper (₹500/day)</option>
+                                <option value="House Moving">House Moving (₹600/day)</option>
+                                <option value="Painter">Painter (₹650/day)</option>
+                                <option value="Electrician">Electrician (₹800/day)</option>
+                                <option value="General Labour">General Labour (₹400/day)</option>
                             </select>
                         </div>
                     </div>
@@ -107,7 +108,7 @@
                     
                     <div class="summary-item main-item">
                         <span id="summary-service-name">Select a service</span>
-                        <span id="summary-base-rate">₹0.00/hr</span>
+                        <span id="summary-base-rate">₹0.00/day</span>
                     </div>
 
                     <div class="summary-item">
@@ -124,9 +125,9 @@
 
                     <div class="summary-total">
                         <span>Estimated Total Rate</span>
-                        <span id="summary-total-rate" class="total-price">₹0.00/hr</span>
+                        <span id="summary-total-rate" class="total-price">₹0.00/day</span>
                     </div>
-                    <p class="summary-note text-muted" style="font-size: 0.75rem; text-align: right; margin-top: 0.5rem;">*Final price depends on hours worked. Total includes platform fee flat rate.</p>
+                    <p class="summary-note text-muted" style="font-size: 0.75rem; text-align: right; margin-top: 0.5rem;">*Final price depends on days worked. Total includes platform fee flat rate.</p>
 
                      <button type="button" id="confirm-booking-btn" class="btn btn-primary w-100 btn-large" style="margin-top: 2rem;">
                         Confirm Booking
@@ -192,17 +193,17 @@
                 
                 if(selectedText && rates[selectedText]) {
                     const baseRate = rates[selectedText];
-                    const hourlyTotal = baseRate * qty;
+                    const dailyTotal = baseRate * qty;
                     
                     summaryServiceName.textContent = selectedText;
-                    summaryBaseRate.textContent = `₹${baseRate.toLocaleString('en-IN')}.00/hr`;
+                    summaryBaseRate.textContent = `₹${baseRate.toLocaleString('en-IN')}.00/day`;
                     summaryQty.textContent = `${qty} Worker${qty > 1 ? 's' : ''}`;
                     // Total calculation: (base * qty) + flat fee representation just for visual 
-                    summaryTotalRate.textContent = `₹${hourlyTotal.toLocaleString('en-IN')}.00/hr`; 
+                    summaryTotalRate.textContent = `₹${dailyTotal.toLocaleString('en-IN')}.00/day`; 
                 } else {
                     summaryServiceName.textContent = "Select a service";
-                    summaryBaseRate.textContent = "₹0.00/hr";
-                    summaryTotalRate.textContent = "₹0.00/hr";
+                    summaryBaseRate.textContent = "₹0.00/day";
+                    summaryTotalRate.textContent = "₹0.00/day";
                 }
             };
 
