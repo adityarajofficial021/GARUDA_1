@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Booking | LabourNow</title>
+    <meta name="description" content="Finalize your required service and worker count.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light" style="padding-top: 80px;">
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">Labour<span>Now</span></a>
+            <div class="nav-links">
+                <span style="font-weight: 600; color: var(--text-main);">Secure Checkout</span>
+            </div>
+            <div class="nav-actions">
+                <div class="user-profile-mini">
+                    <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff&size=40" alt="User">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Booking Main -->
+    <div class="container" style="padding: 3rem 1.5rem; max-width: 1000px;">
+        <div class="text-center" style="margin-bottom: 3rem;">
+            <h1 class="section-title text-left" style="font-size: 2rem;">Complete Your Booking</h1>
+            <p class="section-subtitle text-left" style="margin-left: 0;">Specify the details of your job.</p>
+        </div>
+
+        <div class="booking-layout">
+            <!-- Form Side -->
+            <div class="booking-form-area block-reveal">
+                <form id="booking-form" class="card-form">
+                    
+                    <!-- Service Type (Pre-filled if params exist) -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-briefcase text-primary"></i> Service Type</h3>
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <select id="booking-service" class="custom-select" required>
+                                <option value="" disabled selected>Select a Service</option>
+                                <option value="Mason">Mason (₹700/hr)</option>
+                                <option value="Construction Helper">Construction Helper (₹500/hr)</option>
+                                <option value="House Moving">House Moving (₹600/hr)</option>
+                                <option value="Painter">Painter (₹650/hr)</option>
+                                <option value="Electrician">Electrician (₹800/hr)</option>
+                                <option value="General Labour">General Labour (₹400/hr)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Worker Quantity -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-users text-primary"></i> How many workers do you need?</h3>
+                        <div class="quantity-selector" style="margin-top: 1rem;">
+                            <button type="button" class="qty-btn" id="qty-minus"><i class="fas fa-minus"></i></button>
+                            <input type="number" id="worker-qty" value="1" min="1" max="20" readonly>
+                            <button type="button" class="qty-btn" id="qty-plus"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <p class="qty-hint text-muted" style="margin-top: 0.5rem; font-size: 0.875rem;">You can hire up to 20 workers for a single job.</p>
+                    </div>
+
+                    <!-- Date & Time -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-calendar-alt text-primary"></i> Date & Time</h3>
+                        <div class="date-time-grid">
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" id="booking-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Time</label>
+                                <input type="time" id="booking-time" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-map-marker-alt text-primary"></i> Job Location</h3>
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <input type="text" placeholder="Street Address" required style="margin-bottom: 1rem;">
+                            <div class="date-time-grid">
+                                <input type="text" placeholder="City" required>
+                                <input type="text" placeholder="ZIP Code" required>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label>Additional Instructions (Optional)</label>
+                            <textarea placeholder="e.g. Park in the back driveway, gate code is 1234." rows="3"></textarea>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Summary Side -->
+            <div class="booking-summary-area block-reveal" style="transition-delay: 150ms;">
+                <div class="summary-card">
+                    <h3>Order Summary</h3>
+                    
+                    <div class="summary-item main-item">
+                        <span id="summary-service-name">Select a service</span>
+                        <span id="summary-base-rate">₹0.00/hr</span>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>Workers Needed</span>
+                        <span id="summary-qty">1</span>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>Platform Fee</span>
+                        <span>₹150.00</span>
+                    </div>
+
+                    <div class="summary-divider"></div>
+
+                    <div class="summary-total">
+                        <span>Estimated Total Rate</span>
+                        <span id="summary-total-rate" class="total-price">₹0.00/hr</span>
+                    </div>
+                    <p class="summary-note text-muted" style="font-size: 0.75rem; text-align: right; margin-top: 0.5rem;">*Final price depends on hours worked. Total includes platform fee flat rate.</p>
+
+                     <button type="button" id="confirm-booking-btn" class="btn btn-primary w-100 btn-large" style="margin-top: 2rem;">
+                        Confirm Booking
+                    </button>
+                    <p class="text-center text-muted" style="font-size: 0.75rem; margin-top: 1rem;">
+                        <i class="fas fa-lock"></i> Secure & Encrypted Payment
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content text-center block-reveal active">
+            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+            <h2>Booking Confirmed!</h2>
+            <p id="success-message" class="text-muted">Your worker will arrive on time.</p>
+            <a href="index.html" class="btn btn-primary btn-large w-100" style="margin-top: 1.5rem;">Return Home</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // URL Parameters Parsing
+            const urlParams = new URLSearchParams(window.location.search);
+            const serviceParam = urlParams.get('service');
+            const selectElem = document.getElementById('booking-service');
+            
+            // Service Rates Map
+            const rates = {
+                "Mason": 700,
+                "Construction Helper": 500,
+                "House Moving": 600,
+                "Painter": 650,
+                "Electrician": 800,
+                "General Labour": 400
+            };
+
+            // Pre-fill select if valid service passed in URL
+            if(serviceParam) {
+                // Capitalize properly to match options assuming generic URL param passed
+                const mappedService = serviceParam.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                
+                Array.from(selectElem.options).forEach(opt => {
+                    if(opt.value === mappedService || opt.value.toLowerCase() === serviceParam.replace(/-/g, ' ').toLowerCase()) {
+                        opt.selected = true;
+                    }
+                });
+            }
+
+            // Calculation Logic
+            const qtyInput = document.getElementById('worker-qty');
+            const summaryServiceName = document.getElementById('summary-service-name');
+            const summaryBaseRate = document.getElementById('summary-base-rate');
+            const summaryQty = document.getElementById('summary-qty');
+            const summaryTotalRate = document.getElementById('summary-total-rate');
+
+            const calculateTotal = () => {
+                const selectedText = selectElem.options[selectElem.selectedIndex].value;
+                const qty = parseInt(qtyInput.value) || 1;
+                
+                if(selectedText && rates[selectedText]) {
+                    const baseRate = rates[selectedText];
+                    const hourlyTotal = baseRate * qty;
+                    
+                    summaryServiceName.textContent = selectedText;
+                    summaryBaseRate.textContent = `₹${baseRate.toLocaleString('en-IN')}.00/hr`;
+                    summaryQty.textContent = `${qty} Worker${qty > 1 ? 's' : ''}`;
+                    // Total calculation: (base * qty) + flat fee representation just for visual 
+                    summaryTotalRate.textContent = `₹${hourlyTotal.toLocaleString('en-IN')}.00/hr`; 
+                } else {
+                    summaryServiceName.textContent = "Select a service";
+                    summaryBaseRate.textContent = "₹0.00/hr";
+                    summaryTotalRate.textContent = "₹0.00/hr";
+                }
+            };
+
+            // Event Listeners for Calculation
+            selectElem.addEventListener('change', calculateTotal);
+            
+            document.getElementById('qty-plus').addEventListener('click', () => {
+                let val = parseInt(qtyInput.value);
+                if(val < 20) {
+                    qtyInput.value = val + 1;
+                    calculateTotal();
+                }
+            });
+
+            document.getElementById('qty-minus').addEventListener('click', () => {
+                let val = parseInt(qtyInput.value);
+                if(val > 1) {
+                    qtyInput.value = val - 1;
+                    calculateTotal();
+                }
+            });
+
+            // Initial Calculate
+            calculateTotal();
+
+            // Set Min Date to Today
+            const dateInput = document.getElementById('booking-date');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.min = today;
+
+            // Confirm Booking Action
+            document.getElementById('confirm-booking-btn').addEventListener('click', (e) => {
+                // Ensure service is selected
+                if(!selectElem.value) {
+                    alert("Please select a service first.");
+                    return;
+                }
+                
+                const form = document.getElementById('booking-form');
+                if(!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                // Show Success Modal
+                const modal = document.getElementById('success-modal');
+                const qty = qtyInput.value;
+                const service = selectElem.options[selectElem.selectedIndex].value;
+                
+                document.getElementById('success-message').textContent = `Successfully booked ${qty} ${service}(s). They will arrive at the scheduled time!`;
+                modal.style.display = 'flex';
+                
+                // Prevent scrolling behind modal
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    </script>
+</body>
+</html>
