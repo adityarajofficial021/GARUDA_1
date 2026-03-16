@@ -13,8 +13,8 @@ Through the platform, users can:-
 
 At the same time, workers benefit by:-
 
--Getting direct access to job opportunities
--Receiving fairer payments without middlemen
--Increasing their visibility and chances of getting work
+- Getting direct access to job opportunities
+- Receiving fairer payments without middlemen
+- Increasing their visibility and chances of getting work
 
 LabourNow aims to make the process of finding and booking labour simple, transparent, and accessible, helping both workers and customers save time while creating better employment opportunities.
